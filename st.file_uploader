@@ -1,0 +1,16 @@
+uploaded_file = st.file_uploader("Choose a photo to upload", type=["jpg", "jpeg", "png"])
+if uploaded_file is not None:
+    with open(os.path.join("uploads", uploaded_file.name), "wb") as f:
+        f.write(uploaded_file.getbuffer())
+if uploaded_file is not None:
+    image = Image.open(uploaded_file)
+    st.image(image, caption="Uploaded photo", use_column_width=True)
+if uploaded_file is not None:
+    st.download_button(
+        label="Download photo",
+        data=uploaded_file.getvalue(),
+        file_name=uploaded_file.name,
+        mime="image/jpeg"
+    )
+st.run_app()
+
